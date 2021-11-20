@@ -85,6 +85,39 @@ public class prihlaseni {
         logOutButton.click();
     }
 
+    //test5   uspesna registracia noveho uzivatela
+    @Test
+    public void UzivatelBolUspesneZaregistrovanySValidnymiUdajmi() {
+       prohlizec.navigate().to("http://czechitas-datestovani-hackathon.cz/en/login?back=my-account");
+
+        WebElement emailAdress = prohlizec.findElement(By.id("email_create"));
+        emailAdress.click();
+        emailAdress.sendKeys("lalala@abcd.com");
+
+        WebElement buttonCreateAccount = prohlizec.findElement(By.className("icon-user"));
+        buttonCreateAccount.click();
+        wait.until(ExpectedConditions.presenceOfElementLocated(By.xpath("//*[@id=\"customer_firstname\"]")));
+
+        prohlizec.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        WebElement firstName = prohlizec.findElement(By.xpath("//*[@id=\"customer_firstname\"]"));
+        firstName.click();
+        firstName.sendKeys("John");
+
+        WebElement secondName = prohlizec.findElement(By.xpath("//*[@id=\"customer_lastname\"]"));
+        secondName.click();
+        secondName.sendKeys("Wick");
+
+        WebElement heslo = prohlizec.findElement(By.xpath("//*[@id=\"passwd\"]"));
+        heslo.click();
+        heslo.sendKeys("Bradavice123");
+
+        WebElement checkBox = prohlizec.findElement(By.xpath("//*[@id=\"newsletter\"]"));
+        checkBox.click();
+
+        WebElement registerButton = prohlizec.findElement(By.xpath("//span[contains(text(),'Register')]"));
+        registerButton.click();
+    }
+
 
     public void prihlasenieDoAplikacie(String url, String emailElementId, String textPreEmail, String hesloElementId, String textPreHeslo) {
         prohlizec.navigate().to(url);
